@@ -1,0 +1,44 @@
+syntax = "proto3";
+option go_package = "./goodsService";
+//  定义 RPC 服务，生成的是接口
+service GoodsService {
+    rpc AddGoods(AddGoodsReq) returns (AddGoodsRes);
+    rpc GetGoods(GetGoodsReq) returns (GetGoodsRes);
+}
+
+// 定义请求消息
+message AddGoodsReq {
+    string title = 1;
+    double price = 2;
+    string content = 3;
+}
+
+// 定义响应消息
+message AddGoodsRes {
+    bool success = 1;
+    string message = 2;
+}
+
+message GetGoodsReq {
+    int64 id = 1;
+}
+
+message GetGoodsRes {
+    int64 id = 1;
+    string title = 2;
+    double price = 3;
+    string content = 4;
+}
+// protoc --go-grpc_out=./ *.proto --go_out=./ *.proto
+// --go-grpc_out=./ *.proto 负责生成 _grpc.pb.go文件，里面包含了 gRPC 服务端和客户端接口的代码
+// --go_out=./ *.proto 负责生成 .pb.go文件，里面是消息结构的 Go 语言定义及其序列化方法
+
+// _grpc.pb.go 文件内容说明：
+// 服务端相关结构体
+// GoodsServiceServer 是 GoodsService 服务的服务端接口,服务端业务代码需要实现该接口
+// RegisterGoodsServiceServer 函数用于将服务端接口注册到 gRPC 服务器
+
+// 客户端相关结构体
+// GoodsServiceClient 是 GoodsService 服务的客户端接口
+    // goodsServiceClient 是 GoodsServiceClient 接口的具体实现
+// NewGoodsServiceClient 函数用于创建 GoodsServiceClient 接口的具体实现

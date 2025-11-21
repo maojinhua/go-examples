@@ -1,0 +1,28 @@
+syntax = "proto3";
+// 在当前目录下创建一个 proto 文件夹并且生成 userinfo pb.go 文件
+// option go_package = "./proto;userinfo";
+
+// 在当前目录下生成 userinfo pb.go 文件
+// option go_package = "./;userinfo";
+
+// 在当前目录下创建 userService 目录并且生成 pb.go 文件
+option go_package = "./userService";
+
+
+message UserInfo{
+    string username = 1;
+    int64 age = 2;
+    PhoneType phoneType = 3;
+    repeated string hobby = 4;
+}
+
+// 定义枚举类型
+enum PhoneType{
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+}
+
+// protoc --go_out=./ *.proto 命令生成 proto 文件， 
+// --go_out=./ 表示在当前路径的 proto 目录下生成 pb.go 文件
+// *.proto 表示当前目录下的所有 proto 文件
