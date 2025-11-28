@@ -29,6 +29,7 @@ message GetGoodsRes {
     double price = 3;
     string content = 4;
 }
+
 // protoc --go-grpc_out=./ *.proto --go_out=./ *.proto
 // --go-grpc_out=./ *.proto 负责生成 _grpc.pb.go文件，里面包含了 gRPC 服务端和客户端接口的代码
 // --go_out=./ *.proto 负责生成 .pb.go文件，里面是消息结构的 Go 语言定义及其序列化方法
