@@ -10,6 +10,8 @@ import (
 // 读取的时候，先读取4字节长度，然后根据长度读取实际数据
 func handleConn(c net.Conn) {
 	defer c.Close()
+	// for 循环需要判断边界
+	// 当客户端断开连接时，Read 会返回 EOF 错误，此时调用 c.Write 已无效
 	for {
 		// 从连接上读取数据
 		buf := make([]byte, 10)
